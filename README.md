@@ -1,3 +1,4 @@
 # Flappy-bird
 Unity game project
-Testing the game
+ 
+ A Bird Game which have to cross the obstacle to cross the world.
