@@ -9,7 +9,6 @@ public class Bird : MonoBehaviour
 	private Animator anim;					//Reference to the Animator component.
 	private Rigidbody2D rb2d;				//Holds a reference to the Rigidbody2D component of the bird.
 	public bool isStarted=false;
-	public GameObject name;
 	public GameObject taptext;
 	void Start()
 	{
@@ -31,7 +30,7 @@ public class Bird : MonoBehaviour
 				if (Input.GetMouseButtonDown (0)) {
 					GetComponentInParent<Rigidbody2D> ().gravityScale = 1;
 					//Disabling the Game name Text
-					name.SetActive (false);
+					//name.SetActive (false);
 					//animating the on screen text
 					taptext.SetActive(false);
 					//...tell the animator about it and then...
