@@ -74,15 +74,23 @@ public class FacebookIntegration : MonoBehaviour {
 		}
 	}
 
-
+	//Share the highscore to facebook
 	public void ShareHighscore(){
+		int score = PlayerPrefs.GetInt ("highScore");
 		if (FB.IsLoggedIn) {
-			//int score = PlayerPrefs.GetInt ("highScore");
-			//Debug.Log ("highScore" + score);
-			FB.FeedShare (
-				linkCaption: "Flappy Bird",
-				linkName: "Checkout my New HighScore:"
-			);
+			FB.ShareLink (
+				contentTitle: "Flappy Bird, HighScore-"+score,
+				contentURL: new System.Uri ("https://weavebytes.com"),
+				contentDescription: "Beat my HighScore:"+score);
 		}
+	}
+
+	public void InviteFriends(){
+		FB.AppRequest (
+			"Come play this great game!",
+			null,null,null,null,null,null,
+			delegate(IAppRequestResult result) {
+				Debug.Log (result.RawResult);	
+			});
 	}
 }
