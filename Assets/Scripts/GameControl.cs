@@ -47,10 +47,14 @@ public class GameControl : MonoBehaviour {
 			return;
 		}
 		score++;
+        AudioManager.PlaySound("point");
 		//Getting current user score
 		scoreText.text = "Score:" + score.ToString ();
 		//storing it in the player prefs
 		PlayerPrefs.SetInt ("score",score);
+
+        // Incresing the scrolling speed of the game 
+        if (score%10==0) { scrollSpeed+=-0.1f; }
 		//checking for the valid highscore
 		if (PlayerPrefs.HasKey ("highScore")) {
 			if (score>PlayerPrefs.GetInt("highScore")) {
@@ -62,7 +66,7 @@ public class GameControl : MonoBehaviour {
 	}
 
 	public void BirdDied(){
-		//show the gameover text
+        //show the gameover text
 		gameOverText.SetActive (true);
 		gameOver = true;
 	}

@@ -12,6 +12,7 @@ public class Bird : MonoBehaviour
 	public GameObject taptext;
 	void Start()
 	{
+        Time.timeScale = 0;
 		GetComponentInParent<Rigidbody2D> ().gravityScale = 0;
 		//Get reference to the Animator component attached to this GameObject.
 		anim = GetComponent<Animator> ();
@@ -28,11 +29,13 @@ public class Bird : MonoBehaviour
 
 				//Look for input to trigger a "flap".
 				if (Input.GetMouseButtonDown (0)) {
+                    Time.timeScale = 1;
 					GetComponentInParent<Rigidbody2D> ().gravityScale = 1;
 					//Disabling the Game name Text
 					//name.SetActive (false);
 					//animating the on screen text
 					taptext.SetActive(false);
+                    AudioManager.PlaySound("wing");
 					//...tell the animator about it and then...
 					anim.SetTrigger ("Flap");
 					//...zero out the birds current y velocity before...
@@ -48,12 +51,14 @@ public class Bird : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D other)
 	{
+        AudioManager.PlaySound("hit");
 		// Zero out the bird's velocity
 		rb2d.velocity = Vector2.zero;
 		// If the bird collides with something set it to dead...
 		isDead = true;
 		isStarted = false;
-		//...tell the Animator about it...
+        //...tell the Animator about it...
+        AudioManager.PlaySound("die");
 		anim.SetTrigger ("Die");
 		//...and tell the game control about it.
 		GameControl.instance.BirdDied ();

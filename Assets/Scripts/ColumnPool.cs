@@ -39,8 +39,8 @@ public class ColumnPool : MonoBehaviour
 		timeSinceLastSpawned += Time.deltaTime;
 
 		if (GameControl.instance.gameOver == false && timeSinceLastSpawned >= spawnRate) 
-		{	
-			timeSinceLastSpawned = 0f;
+		{
+            timeSinceLastSpawned = 0f;
 
 			//Set a random y position for the column
 			float spawnYPosition = Random.Range(columnMin, columnMax);
